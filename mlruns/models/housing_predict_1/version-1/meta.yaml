@@ -1,0 +1,15 @@
+creation_timestamp: 1761749353169
+current_stage: None
+deployment_job_state: null
+description: ''
+last_updated_timestamp: 1761749353169
+model_id: m-f65bc5835e184a088d8c239aa79cf5a0
+name: housing_predict_1
+run_id: 9bd011a8f7184396a8df69304b7b0c1d
+run_link: ''
+source: file:///home/lhvu/mlops/mlops-course-students/mlruns/189852334041914494/models/m-f65bc5835e184a088d8c239aa79cf5a0/artifacts
+status: READY
+status_message: null
+storage_location: file:///home/lhvu/mlops/mlops-course-students/mlruns/189852334041914494/models/m-f65bc5835e184a088d8c239aa79cf5a0/artifacts
+user_id: null
+version: 1

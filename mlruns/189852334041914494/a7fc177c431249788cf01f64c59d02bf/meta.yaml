@@ -1,0 +1,14 @@
+artifact_uri: file:///home/lhvu/mlops/mlops-course-students/mlruns/189852334041914494/a7fc177c431249788cf01f64c59d02bf/artifacts
+end_time: 1761400636272
+entry_point_name: ''
+experiment_id: '189852334041914494'
+lifecycle_stage: active
+run_id: a7fc177c431249788cf01f64c59d02bf
+run_name: sincere-auk-206
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761400630998
+status: 3
+tags: []
+user_id: root

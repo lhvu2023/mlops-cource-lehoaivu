@@ -1,0 +1,10 @@
+artifact_location: file:///home/lhvu/mlops/mlops-course-students/mlruns/189852334041914494/models/m-4036a70d092647ca8806a6e9974517db/artifacts
+creation_timestamp: 1761400631037
+experiment_id: '189852334041914494'
+last_updated_timestamp: 1761400636266
+model_id: m-4036a70d092647ca8806a6e9974517db
+model_type: null
+name: model
+source_run_id: a7fc177c431249788cf01f64c59d02bf
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:///home/lhvu/mlops/mlops-course-students/mlruns/189852334041914494/ca177b7bb8dc473b8f9f023993062d32/artifacts
+end_time: 1761400388479
+entry_point_name: ''
+experiment_id: '189852334041914494'
+lifecycle_stage: active
+run_id: ca177b7bb8dc473b8f9f023993062d32
+run_name: Housing_linear_regression_1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761400388429
+status: 3
+tags: []
+user_id: root
