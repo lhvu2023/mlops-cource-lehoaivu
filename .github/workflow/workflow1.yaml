@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'scripts/session_6/hello_world.txt'
+  pull_request:
+    paths:
+      - 'scripts/session_6/pull_request_test.txt'
 
 jobs:
   workflow1_job:
@@ -13,4 +16,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Display file content
-        run: cat scripts/session_6/hello_world.txt
+        #run: cat scripts/session_6/hello_world.txt
+        run: |
+          if [ "$GITHUB_EVENT_NAME" == "push" ]; then
+            echo "This is a push event. Displaying hello_world.txt content:"
+            cat scripts/session_6/hello_world.txt
+          elif [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
+            echo "This is a pull request event. Displaying pull_request_test.txt content:"
+            cat scripts/session_6/pull_request_test.txt
+          else
+            echo "This workflow only runs on push or pull request events."
+          fi
