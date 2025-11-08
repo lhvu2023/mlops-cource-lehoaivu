@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from enum import Enum
 import uvicorn
 from scripts.session_3.utils import utils_router
+import pandas as pd
+import joblib
 from scripts.session_3.predict import housing_router
 
 class Method(str, Enum):
@@ -22,7 +24,7 @@ class CalculateResponse(BaseModel):
 app = FastAPI()
 
 app.include_router(utils_router)
-app.include_router(housing_router)
+#app.include_router(housing_router)
 
 @app.get("/")
 def root():
@@ -52,7 +54,7 @@ def calculate(request: CalculateRequest) -> CalculateResponse:
         raise ValueError("Invalid method")
     
     return CalculateResponse(result=result)
-
+    
 class PredictRequest(BaseModel):
     avg_area_income: list[float]
     avg_area_house_age: list[float]
@@ -62,31 +64,46 @@ class PredictRequest(BaseModel):
     
 class PredictResponse(BaseModel):
     predicted_price: float
-
-@app.post("/predict", response_model=PredictResponse)
+    
+model = joblib.load("./housing_linear.joblib")
+    
+@app.post("/predict")
 def predict(request: PredictRequest) -> PredictResponse:
-    import mlflow.sklearn
-    import pandas as pd
-
-    model_name = "housing_predict_1"
-    model_version = "1"
-
-    mlflow.set_tracking_uri(uri="http://localhost:8080")
-
-    model_uri = f"models:/{model_name}/{model_version}"
-    model = mlflow.sklearn.load_model(model_uri)
-
-    data = {
+    input_data = {
         "Avg. Area Income": request.avg_area_income,
         "Avg. Area House Age": request.avg_area_house_age,
         "Avg. Area Number of Rooms": request.avg_area_number_of_rooms,
         "Avg. Area Number of Bedrooms": request.avg_area_number_of_bedrooms,
         "Area Population": request.area_population,
     }
-    input_df = pd.DataFrame(data)
-    predictions = model.predict(input_df)
-    
+    df = pd.DataFrame(input_data)
+    predictions = model.predict(df)
     return PredictResponse(predicted_price=predictions[0])
+
+#@app.post("/predict", response_model=PredictResponse)
+#def predict(request: PredictRequest) -> PredictResponse:
+#    import mlflow.sklearn
+#    import pandas as pd
+#
+#    model_name = "housing_predict_1"
+#    model_version = "1"
+#
+#    mlflow.set_tracking_uri(uri="http://localhost:8080")
+#
+#    model_uri = f"models:/{model_name}/{model_version}"
+#    model = mlflow.sklearn.load_model(model_uri)
+#
+#    data = {
+#        "Avg. Area Income": request.avg_area_income,
+#        "Avg. Area House Age": request.avg_area_house_age,
+#        "Avg. Area Number of Rooms": request.avg_area_number_of_rooms,
+#        "Avg. Area Number of Bedrooms": request.avg_area_number_of_bedrooms,
+#        "Area Population": request.area_population,
+#    }
+#    input_df = pd.DataFrame(data)
+#    predictions = model.predict(input_df)
+#    
+#    return PredictResponse(predicted_price=predictions[0])
           
           
 if __name__ == "__main__":
