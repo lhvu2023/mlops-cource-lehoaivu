@@ -7,6 +7,12 @@ on:
   pull_request:
     paths:
       - 'scripts/session_6/pull_request_test.txt'
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: 'who runs this workflow?'
+        required: true
+        default: 'ubuntu-latest'
 
 jobs:
   workflow1_job:
@@ -25,5 +31,5 @@ jobs:
             echo "This is a pull request event. Displaying pull_request_test.txt content:"
             cat scripts/session_6/pull_request_test.txt
           else
-            echo "This workflow only runs on push or pull request events."
+            echo {{ github.event.inputs.runner }}
           fi
