@@ -1,0 +1,16 @@
+name: workflow1
+
+on:
+  push:
+    paths:
+      - 'scripts/session_6/hello_world.txt'
+
+jobs:
+  workflow1_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Display file content
+        run: cat scripts/session_6/hello_world.txt
